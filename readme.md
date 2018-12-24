@@ -1,3 +1,14 @@
+
+This page is created using Laravel. Most of it is fairly straightforward, the code created for this assignment 
+is mostly found in the directories '/Http/Controllers/Controller' and '/resources/views/machines.blade.php'.
+Temperature status allocation has been done according to the following rule:
+
+            '    temperature calculations: if the temperature has been above 100C, its a fatal. 
+            If it has been 85 degrees thrice in a row, it gets a warning status.  '
+
+
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

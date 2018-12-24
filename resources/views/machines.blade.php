@@ -14,7 +14,8 @@
         <?php
         foreach ($dashboardArray as $machine) {
 
-            /*    temperature calculations: if the temperature has been above 100C, its a fatal. If it has been 85 degrees thrice in a row, it gets a warning status.  */
+            /*    temperature calculations: if the temperature has been above 100C, its a fatal.
+            If it has been 85 degrees thrice in a row, it gets a warning status.  */
 
         $counter = 0;
         $status = 'good';
