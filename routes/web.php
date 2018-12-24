@@ -19,5 +19,5 @@ Route::get('/test', function () {
     return view('test');
 });*/
 
-Route::get('/test', 'Controller@Dashboard');
+Route::get('/machines', 'Controller@Dashboard');
 

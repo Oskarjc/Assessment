@@ -1,4 +1,4 @@
-<h1>TEST</h1>
+<h1>Assessment Marviq</h1>
 
 <div>
     <table>
@@ -8,6 +8,7 @@
             <th>PercentageScrap</th>
             <th>Status</th>
             <th>Downtime</th>
+            <th>Overall Equipment Efficiency</th>
         </tr>
 
         <?php
@@ -62,6 +63,24 @@
             $percentageDowntime = ($totalMinuteDowntime / 1440) * 100;
             echo round($percentageDowntime, 2); echo '%';?></td>
 
+            {{--OEE Calculations--}}
+
+            <?php
+
+                $totalUptime = 1440 - $totalMinuteDowntime;
+
+                $normproduction = 720000;
+                $normUptimeMinutes = 960;
+
+            $performance = $machine['TotalPercentageAndTotalNet'][0]->totalNetValue / $normproduction;
+            $availability = $totalUptime / $normUptimeMinutes;
+            $quality = $machine['TotalPercentageAndTotalNet'][0]->totalNetValue / $machine['TotalPercentageAndTotalNet'][0]->grossProduction;
+
+            $OEE = $performance * $availability * $quality * 100;
+            ?>
+            <td><?php echo round($OEE, 2); echo "%"; ?></td>
+
+
         </tr>
 
         <?php } ?>
@@ -83,11 +102,11 @@ foreach ($dashboardArray as $machine) { ?>
 
 
 
-        <?php foreach ($machine['percentageScrapHourly'] as $percentageScrapHourly) { ?>
+        <?php foreach ($machine['netProductionHourly'] as $netProductionHourly) { ?>
         <tr>
-        <td><?php echo $percentageScrapHourly->productionHour; ?></td>
+        <td><?php echo $netProductionHourly->productionHour; ?></td>
 
-        <td><?php echo $percentageScrapHourly->hourlyNetProduction; ?></td>
+        <td><?php echo $netProductionHourly->hourlyNetProduction; ?></td>
         </tr>
         <?php } ?>
 

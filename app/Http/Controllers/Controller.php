@@ -16,7 +16,7 @@ class Controller extends BaseController
     public function show($machine_name)
     {
 
-        $percentageScrapHourly = DB::select("select 
+        $netProductionHourly = DB::select("select 
                                                      (a.productionValue - b.scrapValue) as hourlyNetProduction,
                                                       a.productionHour
                                                   from
@@ -40,7 +40,8 @@ class Controller extends BaseController
 
         $TotalPercentageAndTotalNet = DB::select("select 
                                                   (b.scrapValue/a.productionValue * 100) as percentage,
-                                                  (a.productionValue - b.scrapValue) as totalNetValue
+                                                  (a.productionValue - b.scrapValue) as totalNetValue,
+                                                  a.productionValue as grossProduction
                                               from
                                                        (select
                                                     sum(value) as productionValue
@@ -93,12 +94,12 @@ class Controller extends BaseController
                                           BETWEEN '2018-01-07 00:00:00' AND '2018-01-07 23:55:00')
                                           ORDER BY datetime_from", [$machine_name]);
 
-        return ['percentageScrapHourly' => $percentageScrapHourly,
+        return ['netProductionHourly' => $netProductionHourly,
                 'TotalPercentageAndTotalNet' => $TotalPercentageAndTotalNet,
                 'TotalDowntime' => $TotalDowntime,
                 'Machine_name' => $machine_name,
                 'LastRun' => $lastRun,
-                'Temperature' => $temperature
+                'Temperature' => $temperature,
         ];
 
     }
@@ -112,11 +113,11 @@ class Controller extends BaseController
             'machine3' => $this->show('2x2 brick mould')
         ];
 
-        $test = [
+        $machines = [
             'dashboardArray' => $dashboardArray
         ];
 
-        return view('test', $test);
+        return view('machines', $machines);
 
     }
 
