@@ -4,7 +4,7 @@ is mostly found in the directories '/Http/Controllers/Controller' and '/resource
 Temperature status allocation has been done according to the following rule:
 
             '    temperature calculations: if the temperature has been above 100C, its a fatal. 
-            If it has been 85 degrees thrice in a row, it gets a warning status.  '
+            If it has been 85 degrees * more then * thrice in a row, it gets a warning status.  '
 
 
 
